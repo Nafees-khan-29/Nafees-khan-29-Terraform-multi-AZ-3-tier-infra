@@ -43,7 +43,7 @@ app.delete('/api/goals/:id', async (req, res) => {
     const data = await response.json();
     res.json(data);
   } catch (error) {
-    console.error('Error removing goal:', error);
+    console.error('Error, removing goal:', error);
     res.status(500).json({ success: false, error: 'Failed to remove goal' });
   }
 });
