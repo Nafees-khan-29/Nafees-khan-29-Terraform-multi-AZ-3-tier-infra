@@ -879,4 +879,4 @@ The strongest story is the platform engineering work:
 
 **Nafees Khan**
 
-DevOps / Cloud Engineering Portfolio Project
+DevOps / Cloud Engineering 
