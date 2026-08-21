@@ -1,0 +1,127 @@
+# =========================
+# Node.js / Frontend
+# =========================
+
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# npm logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+
+# =========================
+# Go / Backend
+# =========================
+
+backend/bin/
+backend/*.exe
+backend/*.exe~
+backend/*.dll
+backend/*.so
+backend/*.dylib
+
+# Go test/build files
+backend/coverage.out
+backend/coverage.html
+
+
+# =========================
+# Terraform
+# =========================
+
+# Terraform working directory
+terraform-infra/**/.terraform/
+terraform-infra/**/.terraform.lock.hcl
+
+# Terraform state files
+terraform-infra/**/*.tfstate
+terraform-infra/**/*.tfstate.*
+terraform-infra/**/terraform.tfstate
+terraform-infra/**/terraform.tfstate.*
+
+# Terraform variable files
+terraform-infra/**/*.tfvars
+terraform-infra/**/*.tfvars.json
+
+# Keep example variable files
+!terraform-infra/**/*.tfvars.example
+
+# Terraform crash logs
+terraform-infra/**/crash.log
+terraform-infra/**/crash.*.log
+
+# Terraform plan files
+terraform-infra/**/*.tfplan
+terraform-infra/**/*.plan
+
+
+# =========================
+# Secrets
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# Certificates / private keys
+*.pem
+*.key
+*.crt
+
+
+# =========================
+# Docker
+# =========================
+
+# Docker local environment files
+docker-local-deployment/.env
+
+# Docker override files
+docker-compose.override.yml
+
+
+# =========================
+# IDE / Editor
+# =========================
+
+.vscode/
+.idea/
+
+# VS Code local history
+.history/
+
+
+# =========================
+# OS Files
+# =========================
+
+# Windows
+Thumbs.db
+Desktop.ini
+dd
+# macOS
+.DS_Store
+
+
+# =========================
+# Logs
+# =========================
+
+*.log
+
+
+# =========================
+# Temporary files
+# =========================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*~

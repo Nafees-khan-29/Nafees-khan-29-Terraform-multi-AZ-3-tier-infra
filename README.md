@@ -9,7 +9,6 @@
 [![Go](https://img.shields.io/badge/Backend-Go-00ADD8?logo=go&logoColor=white)](https://go.dev/)
 [![Node.js](https://img.shields.io/badge/Frontend-Node.js-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 
-
 ## Architecture
 
 ### AWS 3-Tier Multi-AZ Architecture
@@ -47,7 +46,7 @@ The system securely serves a Node.js frontend and a Go REST API using isolated V
 
 ## 📂 Repository Architecture
 
-The project is deliberately structured to separate application logic from cloud infrastructure, mirroring enterprise monorepo patterns[cite: 1].
+The project is deliberately structured to separate application logic from cloud infrastructure, mirroring enterprise monorepo patterns.
 
 *   `/terraform-infra`: Reusable Terraform modules (`vpc`, `alb`, `rds`, `iam`, etc.) and environment-specific configurations (`/environments/dev`)[cite: 1].
 *   `/backend`: Go REST API source code, dependency definitions (`go.mod`), and multi-stage `Dockerfile`[cite: 1].
@@ -64,7 +63,7 @@ Developers can spin up the entire application stack locally using Docker Compose
 ```bash
 cd docker-local-deployment
 docker compose up -d
-
+```
 AWS Cloud Environment
 Continuous Integration: Merging application code to the main branch triggers a GitHub Actions workflow. This builds the Docker images, applies an immutable Git commit SHA tag, and pushes the artifacts to the container registry.
 

@@ -1,0 +1,10 @@
+backend/bin/
+backend/*.exe
+backend/*.exe~
+backend/*.dll
+backend/*.so
+backend/*.dylib
+
+# Go test/build files
+backend/coverage.out
+backend/coverage.html
