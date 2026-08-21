@@ -15,7 +15,7 @@
 ### AWS 3-Tier Multi-AZ Architecture
 
 <p align="center">
-  <img src="docs/architecture.png" alt="AWS 3-Tier Multi-AZ Architecture" width="100%">
+  <img src="docs/architecture-1.png" alt="AWS 3-Tier Multi-AZ Architecture" width="100%">
 </p>
 ## 📌 Executive Summary
 
