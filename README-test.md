@@ -9,109 +9,14 @@
 [![Go](https://img.shields.io/badge/Backend-Go-00ADD8?logo=go&logoColor=white)](https://go.dev/)
 [![Node.js](https://img.shields.io/badge/Frontend-Node.js-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 
-flowchart LR
-    %% --- Style Definitions ---
-    classDef aws fill:#FF9900,stroke:#232F3E,stroke-width:2px,color:white;
-    classDef public fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
-    classDef private fill:#fff3e0,stroke:#f57c00,stroke-width:2px;
-    classDef internal fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
-    classDef db fill:#ffebee,stroke:#d32f2f,stroke-width:2px;
-    classDef devops fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px;
-    classDef cicd fill:#2088FF,stroke:#24292E,stroke-width:2px,color:white;
 
-    %% --- External Actors ---
-    Users((Users))
-    DevOps((DevOps))
+## Architecture
 
-    %% --- CI/CD Pipeline Integration ---
-    subgraph CICD [CI/CD Pipeline & Delivery]
-        direction TB
-        GitHub[GitHub Repository]:::cicd
-        GHActions[GitHub Actions CI/CD]:::cicd
-        Registry[(Container Registry<br/>DockerHub / ECR)]:::cicd
-        Terraform[Terraform Cloud / CLI]:::devops
-    end
+### AWS 3-Tier Multi-AZ Architecture
 
-    %% --- AWS Cloud Environment ---
-    subgraph AWS [AWS Cloud]
-        WAF[AWS WAF]:::public
-        IGW((Internet<br/>Gateway))
-        ExtALB{External<br/>Load Balancer}:::public
-
-        subgraph VPC [VPC]
-            direction TB
-            
-            subgraph AZ1 [Availability Zone 1]
-                direction TB
-                NAT1[NAT Gateway]:::public
-                FE1[Frontend EC2 ASG]:::private
-                BE1[Backend EC2 ASG]:::private
-                DBPri[(Primary DB)]:::db
-            end
-
-            subgraph AZ2 [Availability Zone 2]
-                direction TB
-                Bastion[Bastion Host]:::public
-                NAT2[NAT Gateway]:::public
-                FE2[Frontend EC2 ASG]:::private
-                BE2[Backend EC2 ASG]:::private
-                DBSec[(Secondary DB)]:::db
-            end
-
-            IntALB{Internal<br/>Load Balancer}:::internal
-            VPCEndpoints((VPC<br/>Endpoints))
-        end
-
-        subgraph OpsSec [Ops & Security]
-            direction TB
-            IAM[IAM Roles]:::aws
-            CW[CloudWatch]:::aws
-            SM[Secrets Manager]:::aws
-        end
-    end
-
-    %% --- Traffic Flows ---
-    
-    %% 1. User Traffic
-    Users -- HTTP/HTTPS --> WAF --> IGW --> ExtALB
-    ExtALB --> FE1
-    ExtALB --> FE2
-    
-    %% 2. Internal Application Flow
-    FE1 --> IntALB
-    FE2 --> IntALB
-    IntALB --> BE1
-    IntALB --> BE2
-    BE1 --> DBPri
-    BE2 --> DBPri
-    DBPri -. Private Replication .-> DBSec
-
-    %% 3. DevOps & CI/CD Flow (The Updates)
-    DevOps -- Git Push --> GitHub
-    GitHub -- Triggers --> GHActions
-    GHActions -- 1. Build & Push Image --> Registry
-    GHActions -- 2. Apply Infrastructure --> Terraform
-    Terraform -- Provisions --> AWS
-    GHActions -- 3. ASG Instance Refresh --> AWS
-    
-    %% EC2 pulling images
-    Registry -. Pulls Container Image .-> FE1
-    Registry -. Pulls Container Image .-> BE1
-    Registry -. Pulls Container Image .-> FE2
-    Registry -. Pulls Container Image .-> BE2
-
-    %% 4. Admin Access
-    DevOps -. SSH .-> Bastion
-    Bastion -. SSH Admin .-> BE1
-    Bastion -. SSH Admin .-> BE2
-
-    %% 5. Ops & Security Integrations
-    VPCEndpoints --> IAM
-    VPCEndpoints --> CW
-    VPCEndpoints --> SM
-    BE1 -. Private Access .-> VPCEndpoints
-    BE2 -. Private Access .-> VPCEndpoints
-
+<p align="center">
+  <img src="docs/architecture.png" alt="AWS 3-Tier Multi-AZ Architecture" width="100%">
+</p>
 ## 📌 Executive Summary
 
 This repository houses the infrastructure and application code for a resilient 3-tier web platform. Moving beyond a standard single-server deployment, this project demonstrates core DevOps, Cloud Engineering, and Site Reliability Engineering (SRE) principles. 
