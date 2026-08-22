@@ -22,14 +22,11 @@ This repository houses the infrastructure and application code for a resilient 3
 
 The system securely serves a Node.js frontend and a Go REST API using isolated VPC subnets, dual load balancing, horizontal auto-scaling, and a private PostgreSQL database layer.
 
-### Key Engineering Highlights
-*   **Infrastructure as Code (IaC):** 100% of the AWS infrastructure is provisioned using modular, state-driven Terraform.
-*   **Zero-Trust Networking:** The compute and data tiers reside in private subnets with no direct internet ingress, shielded by strict Security Group boundaries and dual Application Load Balancers (ALBs).
-*   **Elastic Scalability:** EC2 Auto Scaling Groups dynamically adjust capacity based on target-tracking CPU utilization policies.
-*   **Automated Delivery:** Application updates are decoupled from infrastructure provisioning, utilizing parallel CI/CD pipelines to build, tag, and publish Docker images.
-*   **Secure Operations:** Administrative access is brokered through a public Bastion host, while dynamic runtime secrets are retrieved via AWS Secrets Manager using IAM instance profiles[cite: 1].
-
----
+Infrastructure as Code (IaC): 100% of the AWS infrastructure is provisioned using modular, state-driven Terraform.
+Defense-in-Depth Networking: The compute and data tiers reside in private subnets with no direct internet ingress, shielded by strict Security Group boundaries and dual Application Load Balancers (ALBs).
+Elastic Scalability: EC2 Auto Scaling Groups dynamically adjust capacity based on target-tracking CPU utilization policies.
+Automated Delivery: Application updates are decoupled from infrastructure provisioning, utilizing parallel CI/CD pipelines to build, tag, and publish Docker images.
+Secure Operations: Administrative access is brokered through a public Bastion host, while dynamic runtime secrets are retrieved via AWS Secrets Manager using IAM instance profiles.---
 
 ## 🛠 Tech Stack & Tools
 
